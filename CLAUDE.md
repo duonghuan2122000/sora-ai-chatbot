@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `app/backend/` — **trống hoàn toàn**. Chưa có `go.mod`, chưa có dòng code nào.
 - `app/frontend/` — vẫn là scaffold `npm create vue@latest` nguyên bản (`HelloWorld`, `TheWelcome`, `AboutView`, `stores/counter.js`, `e2e/vue.spec.js` đều là rác mẫu, sẽ bị xóa khi làm M1).
 
-Vì vậy **không** suy đoán cấu trúc thư mục Go hay Vue từ code — đọc `docs/` trước. Khi bắt đầu viết code, dựng theo cấu trúc đã ghi trong spec (`docs/auth/m1-tai-khoan-va-xac-thuc.md` mục 8.1 cho Go, mục 9 + `docs/design-system.md` mục 14.4 cho Vue).
+Vì vậy **không** suy đoán cấu trúc thư mục Go hay Vue từ code — đọc wiki rồi tới `docs/` (xem mục dưới). Khi bắt đầu viết code, dựng theo cấu trúc đã ghi trong spec (`docs/auth/m1-tai-khoan-va-xac-thuc.md` mục 8.1 cho Go, mục 9 + `docs/design-system.md` mục 14.4 cho Vue).
 
 ## Nguồn sự thật — đọc theo thứ tự này
 
@@ -23,6 +23,15 @@ Vì vậy **không** suy đoán cấu trúc thư mục Go hay Vue từ code — 
 | `docs/auth/*.svg` | 14 màn hình M1 (nguồn thị giác để dựng UI) |
 
 Bản v1 (`tong-quan.md`) còn mô tả `document_acl` theo nhóm/quyền, Keycloak, widget nhúng — **v2 đã bỏ hết**. Phân quyền nay là cô lập theo `user_id`, xác thực tự build.
+
+## Wiki — đọc trước khi quét `docs/`
+
+`wiki-knowledge/` là tầng **biên soạn sẵn** từ `docs/`: kiến thức đã tách theo chủ đề, liên kết chéo, có đánh dấu mâu thuẫn giữa các phiên bản tài liệu. `docs/` vẫn là **nguồn thô bất biến** (không sửa); wiki là bản đồ của nó.
+
+- **Bắt đầu ở `wiki-knowledge/index.md`** — catalog 23 page chia `sources/` (tóm tắt từng tài liệu nguồn), `concepts/` (khái niệm và quyết định kỹ thuật), `entities/` (module M1–M8, màn hình), `decisions/` (điểm còn mở, thay đổi v1→v2).
+- Trả lời câu hỏi về dự án bằng page wiki + citation `[[tên-page]]`, **không quét lại `docs/`** — trừ khi cần nguyên văn (SQL, mã Go/Vue mẫu, bảng đầy đủ) thì mở đúng mục trong nguồn mà page trỏ tới.
+- Quy ước riêng của wiki ở `wiki-knowledge/CLAUDE.md` (frontmatter, cách đánh dấu mâu thuẫn, định dạng `log.md`).
+- **Khi `docs/` đổi, wiki phải được ingest lại** (skill `sora-wiki`): cập nhật page nguồn + mọi page liên quan, ghi `log.md`. Đừng để wiki lệch khỏi nguồn — nó là thứ được đọc trước.
 
 ## Ngăn xếp đã chốt
 
@@ -59,7 +68,7 @@ Có bộ lệnh spec-driven theo PBI (số), dùng `.specify/specs/<pbi>/`:
 /sora-implement <pbi>      → thi công toàn bộ tasks.md
 ```
 
-Ngoài ra có skill `sora-wiki` (wiki liên kết chéo trong `wiki/`, dùng `index.md` + `log.md` + `CLAUDE.md` riêng).
+Ngoài ra có skill `sora-wiki` — biên soạn và bảo trì `wiki-knowledge/` (xem mục "Wiki" ở trên): ingest nguồn mới, trả lời câu hỏi dựa trên wiki, lint sức khỏe wiki. Gọi skill này khi `docs/` thay đổi.
 
 ## Quy tắc bất di bất dịch
 
@@ -102,4 +111,4 @@ Ngoài ra có skill `sora-wiki` (wiki liên kết chéo trong `wiki/`, dùng `in
 
 ## Còn mở
 
-Xem mục 8 của `nghiep-vu-va-uu-tien-v2.md` và mục 14 của spec M1 (chính sách đăng ký mở/lời mời, chặn tài khoản chưa xác thực đến mức nào, nhà cung cấp email, Turnstile hay hCaptcha, SPA và API cùng site hay khác site). Đừng tự chốt thay người dùng.
+Bản gộp đầy đủ ở `wiki-knowledge/decisions/diem-con-mo.md` (chính sách đăng ký mở/lời mời, chặn tài khoản chưa xác thực đến mức nào, nhà cung cấp email, Turnstile hay hCaptcha, SPA và API cùng site hay khác site, quy mô dự kiến). Nguồn gốc: mục 8 của `nghiep-vu-va-uu-tien-v2.md` và mục 14 của spec M1. Đừng tự chốt thay người dùng.
