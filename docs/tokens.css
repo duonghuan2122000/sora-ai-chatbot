@@ -1,0 +1,197 @@
+/* ==========================================================================
+   Design tokens dùng chung cho toàn bộ hệ thống chatbot (Sora AI Chatbot)
+   Tương thích shadcn-vue (Reka UI) + Tailwind CSS v4.
+   Import một lần trong main.css:  @import "./tokens.css";
+   Tài liệu: design-system.md
+   ========================================================================== */
+
+/* Font: cài qua @fontsource để không phụ thuộc CDN
+   npm i @fontsource-variable/inter @fontsource-variable/jetbrains-mono */
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+:root {
+  /* ---- Bảng màu gốc ---- */
+  --ink:        #0F1B2D;   /* chữ chính, bảng thương hiệu */
+  --ink-2:      #1B2B45;   /* nền phụ trên nền ink */
+  --mist:       #F3F5F8;   /* nền trang */
+  --paper:      #FFFFFF;   /* nền bề mặt (ô nhập, danh sách, hộp thoại) */
+  --blue:       #2B3CE6;   /* hành động chính, liên kết, mục đang chọn */
+  --blue-tint:  #E8EBFD;
+  --highlight:  #FFE66D;   /* vệt bút dạ quang: trích dẫn, mục nhấn */
+  --muted-text: #566377;   /* chữ phụ */
+  --placeholder:#6B778A;
+  --line:       #CBD3DE;   /* đường kẻ, viền trang trí */
+  --input-line: #8A95A6;   /* viền điều khiển (đạt 3:1) */
+
+  --danger:       #B8312A;
+  --danger-tint:  #FCEDEB;
+  --danger-line:  #F0B9B4;
+  --success:      #17784F;
+  --success-tint: #E4F4EC;
+  --success-line: #A9D9C0;
+  --warning:      #8A6100;
+  --warning-tint: #FFF4D6;
+  --warning-line: #F0D27A;
+
+  /* ---- Ánh xạ sang biến của shadcn-vue ---- */
+  --background:            var(--mist);
+  --foreground:            var(--ink);
+  --card:                  var(--paper);
+  --card-foreground:       var(--ink);
+  --popover:               var(--paper);
+  --popover-foreground:    var(--ink);
+  --primary:               var(--blue);
+  --primary-foreground:    #FFFFFF;
+  --secondary:             var(--paper);
+  --secondary-foreground:  var(--ink);
+  --muted:                 #E3E8EE;
+  --muted-foreground:      var(--muted-text);
+  --accent:                var(--blue-tint);
+  --accent-foreground:     var(--blue);
+  --destructive:           var(--danger);
+  --destructive-foreground:#FFFFFF;
+  --border:                var(--line);
+  --input:                 var(--input-line);
+  --ring:                  var(--blue);
+
+  --sidebar:                    var(--paper);
+  --sidebar-foreground:         var(--ink);
+  --sidebar-primary:            var(--blue);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent:             var(--blue-tint);
+  --sidebar-accent-foreground:  var(--blue);
+  --sidebar-border:             var(--line);
+  --sidebar-ring:               var(--blue);
+
+  /* ---- Hình khối ---- */
+  --radius: 0.5rem; /* 8px, bán kính của điều khiển */
+
+  /* ---- Chuyển động ---- */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Màu bổ sung của dự án (dùng như bg-ink, text-success, bg-highlight...) */
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-highlight: var(--highlight);
+  --color-success: var(--success);
+  --color-success-tint: var(--success-tint);
+  --color-success-line: var(--success-line);
+  --color-warning: var(--warning);
+  --color-warning-tint: var(--warning-tint);
+  --color-warning-line: var(--warning-line);
+  --color-danger-tint: var(--danger-tint);
+  --color-danger-line: var(--danger-line);
+  --color-blue-tint: var(--blue-tint);
+
+  /* Bán kính: 6 / 8 / 12 / 16 */
+  --radius-sm: 6px;   /* chip nhỏ, checkbox */
+  --radius-md: var(--radius); /* nút, ô nhập */
+  --radius-lg: 12px;  /* danh sách, vùng chứa */
+  --radius-xl: 16px;  /* hộp thoại, bong bóng chat */
+
+  /* Cỡ chữ (kèm line-height) */
+  --text-display: 1.875rem;           /* 30 */
+  --text-display--line-height: 1.2;
+  --text-display--letter-spacing: -0.02em;
+  --text-title: 1.625rem;             /* 26 */
+  --text-title--line-height: 1.25;
+  --text-title--letter-spacing: -0.02em;
+  --text-heading: 1.0625rem;          /* 17 */
+  --text-heading--line-height: 1.4;
+  --text-heading--letter-spacing: -0.01em;
+  --text-body: 0.9375rem;             /* 15 */
+  --text-body--line-height: 1.55;
+  --text-small: 0.8125rem;            /* 13 */
+  --text-small--line-height: 1.5;
+  --text-micro: 0.6875rem;            /* 11 */
+  --text-micro--line-height: 1.4;
+
+  /* Bóng đổ: chỉ dùng cho lớp phủ (hộp thoại, menu, popover) -> class shadow-overlay */
+  --shadow-overlay: 0 12px 32px -8px rgb(15 27 45 / 0.28);
+}
+
+@layer base {
+  * { border-color: var(--border); }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    font-feature-settings: "tnum" 0;
+  }
+  /* Ô nhập đủ 16px trên di động để iOS không tự phóng to */
+  input, textarea, select { font-size: 16px; }
+  @media (min-width: 768px) { input, textarea, select { font-size: var(--text-body); } }
+
+  /* Vòng focus: 2px xanh + quầng 3px */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  input:focus-visible, textarea:focus-visible {
+    outline: none;
+    border-color: var(--ring);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 25%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Vệt bút dạ quang: dùng cho đoạn trích dẫn nguồn và tab đang chọn.
+     Chữ trên nền highlight luôn là màu ink. */
+  .mark-hl {
+    background: linear-gradient(transparent 14%, var(--highlight) 14%, var(--highlight) 92%, transparent 92%);
+    color: var(--ink);
+    padding: 0 0.25em;
+    margin: 0 -0.25em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  /* Số liệu trong bảng, quota, token */
+  .tabular { font-variant-numeric: tabular-nums; }
+}
