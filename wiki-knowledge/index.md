@@ -1,6 +1,6 @@
 # Index — Wiki Sora AI Chatbot
 
-Catalog mọi page. Cập nhật mỗi lần thêm page. Ngày biên soạn gần nhất: 2026-10-04.
+Catalog mọi page. Cập nhật mỗi lần thêm page. Ngày biên soạn gần nhất: 2026-10-05.
 
 ## Sources — tóm tắt tài liệu nguồn
 
@@ -9,6 +9,7 @@ Catalog mọi page. Cập nhật mỗi lần thêm page. Ngày biên soạn gầ
 - [[design-system]] — nguồn quy tắc thị giác và nội dung cho mọi màn hình
 - [[tokens-css]] — nguồn `tokens.css`
 - [[m1-spec]] — đặc tả chi tiết M1: schema SQL, API, chính sách bảo mật, kế hoạch
+- [[quy-uoc-code]] — nguồn quy ước đặt tên, style SCSS và ràng buộc khóa ngoại
 
 ## Concepts — khái niệm và quyết định kỹ thuật
 
@@ -17,7 +18,7 @@ Catalog mọi page. Cập nhật mỗi lần thêm page. Ngày biên soạn gầ
 - [[rag]] — luồng nạp tài liệu và luồng hỏi đáp có trích dẫn
 - [[vector-search-mariadb]] — rủi ro lớn nhất của MVP và ba phương án
 - [[co-lap-du-lieu-theo-user-id]] — quy tắc bất di bất dịch, ưu tiên #7
-- [[thiet-ke-du-lieu-mariadb]] — UUIDv7, UTC, JSON, cascade, khóa Redis
+- [[thiet-ke-du-lieu-mariadb]] — UUIDv7, UTC, JSON, khóa ngoại (hạn chế), khóa Redis
 - [[xac-thuc-va-token]] — JWT Ed25519, refresh token xoay vòng, thu hồi tức thời
 - [[mat-khau-va-chong-lam-dung]] — argon2id, chính sách mật khẩu, rate limit, CAPTCHA
 - [[chong-do-email]] — phản hồi đồng nhất 202, chống dò thời gian
@@ -25,6 +26,8 @@ Catalog mọi page. Cập nhật mỗi lần thêm page. Ngày biên soạn gầ
 - [[mo-hinh-token-frontend]] — access token trong bộ nhớ, single-flight, nhiều tab
 - [[quy-tac-thiet-ke]] — ba khung bố cục, hình khối, thành phần, giọng văn, từ vựng
 - [[design-tokens]] — bảng token gốc: màu, chữ, bán kính, chuyển động, ánh xạ shadcn-vue
+- [[quy-uoc-dat-ten]] — snake_case cho API/CSDL, header `x-sora-`, class BEM tiền tố `sora-`
+- [[quy-uoc-style-frontend]] — SCSS nested, `base.scss`, điểm cần chốt với Tailwind
 
 ## Entities — nghiệp vụ và màn hình
 

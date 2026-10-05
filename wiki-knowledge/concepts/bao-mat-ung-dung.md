@@ -25,6 +25,7 @@ Prompt cấu hình do người dùng viết (M3) **và** nội dung tài liệu 
 
 - Cookie refresh: `HttpOnly; Secure; SameSite=Strict; Path=/api/v1/auth`, tiền tố `__Secure-`.
 - Chỉ `/auth/refresh` và `/auth/logout` dùng cookie → thêm kiểm tra header `Origin` thuộc danh sách cho phép và yêu cầu `X-Requested-With`. Các route còn lại dùng `Authorization: Bearer` nên không bị CSRF.
+- Header tự đặt của hệ thống mang tiền tố `x-sora-` → [[quy-uoc-dat-ten]].
 - Header: `Strict-Transport-Security`, `Content-Security-Policy` chặt (không inline script), `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`, `Cache-Control: no-store` cho `/auth/*` và `/me/*`.
 - CORS: chỉ đúng origin của SPA. Giới hạn body 8 KB cho route auth.
 

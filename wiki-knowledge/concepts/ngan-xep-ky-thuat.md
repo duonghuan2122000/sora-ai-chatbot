@@ -17,6 +17,7 @@ sources: [docs/ai-chatbot-nghiep-vu-va-uu-tien-v2.md, docs/ai-chatbot-tong-quan.
 | Lưu tệp | **MinIO** (tương thích S3) | |
 | Frontend | **Vue 3 + Vite**, **Pinia**, **vue-router** | |
 | UI | **shadcn-vue (Reka UI)**, **Tailwind CSS v4**, Inter + JetBrains Mono qua `@fontsource`, **Lucide** | Xem [[design-tokens]] |
+| Style | **SCSS** (nested) + `base.scss` cho biến dùng chung → [[quy-uoc-style-frontend]] | Class theo BEM tiền tố `sora-` → [[quy-uoc-dat-ten]] |
 | LLM | Qua API, **chưa chốt nhà cung cấp**, bọc sau lớp trừu tượng | |
 | Xác thực | Tự build (không Keycloak) | [[xac-thuc-va-token]] |
 

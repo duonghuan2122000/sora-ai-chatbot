@@ -14,6 +14,16 @@ sources: [docs/auth/m1-tai-khoan-va-xac-thuc.md, docs/ai-chatbot-tong-quan.md]
 - **Charset:** `utf8mb4` toàn bộ bảng (tiếng Việt đầy đủ).
 - **Metadata linh hoạt:** để trong `JSON`; trường cần lọc nhanh thì dùng **generated column có index** (JSON của MariaDB không phải JSONB).
 - **Xóa cascade:** `users` → `sessions`, `auth_tokens`; `audit_logs.user_id` đặt **NULL** để giữ bản ghi ẩn danh.
+- **Đặt tên:** bảng, cột, PK, UK, FK đều `snake_case` → [[quy-uoc-dat-ten]].
+
+## Khóa ngoại (chốt 2026-10-05, đã hết mâu thuẫn)
+
+**Hạn chế tối đa việc khai `FOREIGN KEY`** — để dữ liệu linh hoạt (dễ tách/nhập bảng, xóa mềm, đổi kiểu khóa, không vướng thứ tự ghi). Chi tiết: [[quy-uoc-code]] §3.2.
+
+- **Ngoại lệ có chủ đích:** `sessions` và `auth_tokens` giữ `FOREIGN KEY ... ON DELETE CASCADE` tới `users` — bảng nhỏ, vòng đời gắn chặt `users`, cascade bảo đảm xóa tài khoản không để lại phiên mồ côi. `docs/auth/m1-tai-khoan-va-xac-thuc.md` §4 đã ghi chú ngoại lệ này (cập nhật 2026-10-05).
+- **Từ M4 trở đi** (`documents`, `chunks`, hội thoại, tin nhắn): **không khai khóa ngoại**. Tầng ứng dụng lo: vẫn tạo index trên cột tham chiếu (`user_id`, `document_id`), xóa theo thứ tự tường minh trong một giao dịch, và có job dọn bản ghi mồ côi.
+- Kiểm thử bắt buộc phủ: xóa tài khoản, xóa tài liệu kèm chunk/vector.
+- Index trên `user_id` vẫn bắt buộc vì mọi truy vấn lọc theo `uid` → [[co-lap-du-lieu-theo-user-id]].
 
 ## Bảng của M1
 

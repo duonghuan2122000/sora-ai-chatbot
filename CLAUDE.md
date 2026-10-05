@@ -4,33 +4,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Trạng thái hiện tại (quan trọng)
 
-Đây là dự án **spec-first**: toàn bộ quyết định nằm trong `docs/`, code gần như chưa có.
+Đây là dự án **spec-first**: quyết định nằm trong `docs/`, đã được biên soạn thành wiki ở `wiki-knowledge/`; code gần như chưa có.
 
 - `app/backend/` — **trống hoàn toàn**. Chưa có `go.mod`, chưa có dòng code nào.
 - `app/frontend/` — vẫn là scaffold `npm create vue@latest` nguyên bản (`HelloWorld`, `TheWelcome`, `AboutView`, `stores/counter.js`, `e2e/vue.spec.js` đều là rác mẫu, sẽ bị xóa khi làm M1).
 
-Vì vậy **không** suy đoán cấu trúc thư mục Go hay Vue từ code — đọc wiki rồi tới `docs/` (xem mục dưới). Khi bắt đầu viết code, dựng theo cấu trúc đã ghi trong spec (`docs/auth/m1-tai-khoan-va-xac-thuc.md` mục 8.1 cho Go, mục 9 + `docs/design-system.md` mục 14.4 cho Vue).
+Vì vậy **không** suy đoán cấu trúc thư mục Go hay Vue từ code — dựng theo spec đã biên soạn trong wiki: [[m1-tai-khoan-va-xac-thuc]] mục 8.1 cho Go, mục 9 + [[quy-tac-thiet-ke]] §14.4 cho Vue. Cần nguyên văn thì mở `docs/auth/m1-tai-khoan-va-xac-thuc.md`.
 
-## Nguồn sự thật — đọc theo thứ tự này
+## Nguồn sự thật — đọc wiki, không quét `docs/`
 
-| File | Nội dung |
-|---|---|
-| `docs/ai-chatbot-nghiep-vu-va-uu-tien-v2.md` | **Nghiệp vụ chốt + thứ tự ưu tiên.** M1–M8, mức 1/2/3. Ưu tiên file này khi mâu thuẫn với bản cũ. |
-| `docs/ai-chatbot-tong-quan.md` | Kiến trúc, luồng RAG, rủi ro kỹ thuật (bản nháp v1 — một phần đã bị v2 thay) |
-| `docs/design-system.md` | Quy tắc thị giác + nội dung, bắt buộc cho mọi màn hình |
-| `docs/tokens.css` | Token thật (biến CSS + ánh xạ shadcn-vue) |
-| `docs/auth/m1-tai-khoan-va-xac-thuc.md` | Đặc tả chi tiết M1: schema SQL, API, chính sách bảo mật, kế hoạch |
-| `docs/auth/*.svg` | 14 màn hình M1 (nguồn thị giác để dựng UI) |
+`wiki-knowledge/` là tầng **biên soạn sẵn** từ `docs/`: kiến thức đã tách theo chủ đề, liên kết chéo, đánh dấu mâu thuẫn giữa các phiên bản tài liệu. `docs/` là **nguồn thô** (không sửa), wiki là bản đồ của nó.
 
-Bản v1 (`tong-quan.md`) còn mô tả `document_acl` theo nhóm/quyền, Keycloak, widget nhúng — **v2 đã bỏ hết**. Phân quyền nay là cô lập theo `user_id`, xác thực tự build.
+**Mặc định trả lời bằng wiki** + citation `[[tên-page]]`. Chỉ mở `docs/` khi cần **nguyên văn** (SQL, mã Go/Vue mẫu, bảng đầy đủ) — mỗi page wiki đã trỏ tới đúng mục của nguồn. Bắt đầu ở `wiki-knowledge/index.md`.
 
-## Wiki — đọc trước khi quét `docs/`
+| Chủ đề | Page wiki | Nguồn gốc (chỉ mở khi cần nguyên văn) |
+|---|---|---|
+| Nghiệp vụ chốt, thứ tự ưu tiên M1–M8 | [[nghiep-vu-uu-tien-v2]], [[modules-m1-m8]] | `docs/ai-chatbot-nghiep-vu-va-uu-tien-v2.md` — **thắng** khi mâu thuẫn với bản cũ |
+| Kiến trúc, luồng RAG, rủi ro kỹ thuật | [[kien-truc-he-thong]], [[rag]], [[vector-search-mariadb]] | `docs/ai-chatbot-tong-quan.md` (v1 — một phần đã bị v2 thay: bỏ `document_acl`, Keycloak, widget nhúng; phân quyền nay cô lập theo `user_id`) |
+| Design system, token | [[quy-tac-thiet-ke]], [[design-tokens]] | `docs/design-system.md`, `docs/tokens.css` |
+| M1 — tài khoản và xác thực | [[m1-tai-khoan-va-xac-thuc]], [[man-hinh-m1]] | `docs/auth/m1-tai-khoan-va-xac-thuc.md`, `docs/auth/*.svg` |
+| Quy ước code (đặt tên, SCSS, khóa ngoại) | [[quy-uoc-dat-ten]], [[quy-uoc-style-frontend]], [[thiet-ke-du-lieu-mariadb]] | `docs/quy-uoc-code.md` |
+| Điểm còn mở, thay đổi v1→v2 | [[diem-con-mo]], [[thay-doi-v1-sang-v2]] | mục 8 của v2 và mục 14 của spec M1 |
 
-`wiki-knowledge/` là tầng **biên soạn sẵn** từ `docs/`: kiến thức đã tách theo chủ đề, liên kết chéo, có đánh dấu mâu thuẫn giữa các phiên bản tài liệu. `docs/` vẫn là **nguồn thô bất biến** (không sửa); wiki là bản đồ của nó.
-
-- **Bắt đầu ở `wiki-knowledge/index.md`** — catalog 23 page chia `sources/` (tóm tắt từng tài liệu nguồn), `concepts/` (khái niệm và quyết định kỹ thuật), `entities/` (module M1–M8, màn hình), `decisions/` (điểm còn mở, thay đổi v1→v2).
-- Trả lời câu hỏi về dự án bằng page wiki + citation `[[tên-page]]`, **không quét lại `docs/`** — trừ khi cần nguyên văn (SQL, mã Go/Vue mẫu, bảng đầy đủ) thì mở đúng mục trong nguồn mà page trỏ tới.
-- Quy ước riêng của wiki ở `wiki-knowledge/CLAUDE.md` (frontmatter, cách đánh dấu mâu thuẫn, định dạng `log.md`).
+- Quy ước viết wiki ở `wiki-knowledge/CLAUDE.md` (frontmatter, cách đánh dấu mâu thuẫn, định dạng `log.md`).
 - **Khi `docs/` đổi, wiki phải được ingest lại** (skill `sora-wiki`): cập nhật page nguồn + mọi page liên quan, ghi `log.md`. Đừng để wiki lệch khỏi nguồn — nó là thứ được đọc trước.
 
 ## Ngăn xếp đã chốt
@@ -39,7 +35,7 @@ Backend: **Go + Gin**, **MariaDB** (bản có kiểu `VECTOR`, ≥ 11.8 LTS, `ut
 Frontend: **Vue 3 + Vite**, **Pinia**, **vue-router**, **shadcn-vue (Reka UI)**, **Tailwind CSS v4**, Inter + JetBrains Mono qua `@fontsource`, icon **Lucide** (`lucide-vue-next`).
 LLM: gọi qua API (chưa chốt nhà cung cấp), bọc sau lớp trừu tượng.
 
-Frontend chưa cài Tailwind/shadcn — đó là bước đầu khi làm M1.
+Frontend chưa cài Tailwind/shadcn/SCSS (`sass`) — đó là bước đầu khi làm M1. Quy ước style (SCSS nested, `base.scss`, BEM `sora-`) ở [[quy-uoc-style-frontend]] và [[quy-uoc-dat-ten]].
 
 ## Lệnh
 
@@ -68,7 +64,7 @@ Có bộ lệnh spec-driven theo PBI (số), dùng `.specify/specs/<pbi>/`:
 /sora-implement <pbi>      → thi công toàn bộ tasks.md
 ```
 
-Ngoài ra có skill `sora-wiki` — biên soạn và bảo trì `wiki-knowledge/` (xem mục "Wiki" ở trên): ingest nguồn mới, trả lời câu hỏi dựa trên wiki, lint sức khỏe wiki. Gọi skill này khi `docs/` thay đổi.
+Ngoài ra có skill `sora-wiki` — biên soạn và bảo trì `wiki-knowledge/` (xem mục "Nguồn sự thật" ở trên): ingest nguồn mới, trả lời câu hỏi dựa trên wiki, lint sức khỏe wiki. Gọi skill này khi `docs/` thay đổi.
 
 ## Quy tắc bất di bất dịch
 
@@ -91,7 +87,7 @@ Ngoài ra có skill `sora-wiki` — biên soạn và bảo trì `wiki-knowledge/
 
 ## Giao diện — luật của design system
 
-Đọc `docs/design-system.md` trước khi dựng màn hình mới; checklist ở mục 15 là điều kiện hoàn thành.
+Đọc [[quy-tac-thiet-ke]] + [[design-tokens]] trước khi dựng màn hình mới; checklist mục 15 của nguồn là điều kiện hoàn thành (nguyên văn ở `docs/design-system.md`).
 
 - **Ba khung bố cục** (mục 4.2): Xác thực (chia đôi 520 + 400), Ứng dụng (thanh bên 248 + nội dung), Cài đặt (hai cột 240 + 460).
 - **Một điểm nhấn mỗi vùng**: chỉ một nút primary; `highlight` (`#FFE66D`) chỉ dùng cho trích dẫn nguồn, tab đang chọn, vệt nhấn — không làm nền nút. Màu chỉ lấy từ bảng 2.1.

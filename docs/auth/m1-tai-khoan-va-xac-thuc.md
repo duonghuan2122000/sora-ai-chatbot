@@ -95,6 +95,8 @@ Khuyến nghị đặt SPA và API **cùng site** (ví dụ `app.example.com` v�
 ## 4. Mô hình dữ liệu
 
 > ID dùng kiểu `UUID` của MariaDB, sinh UUIDv7 ở phía Go (`google/uuid`). Toàn bộ bảng dùng `utf8mb4`.
+>
+> **Khóa ngoại:** trong M1, chỉ `sessions` và `auth_tokens` khai `FOREIGN KEY ... ON DELETE CASCADE` tới `users` — ngoại lệ có chủ đích với quy ước "hạn chế khóa ngoại" ở `docs/quy-uoc-code.md` mục 3.2. Bảng từ M4 trở đi **không khai khóa ngoại**; ràng buộc và thứ tự xóa do tầng ứng dụng lo.
 
 ### 4.1. `users`
 

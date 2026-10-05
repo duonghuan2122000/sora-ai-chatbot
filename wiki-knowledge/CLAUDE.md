@@ -54,3 +54,4 @@ wiki-knowledge/
 | `docs/tokens.css` | [[tokens-css]] (nguồn) → [[design-tokens]] | Token thật |
 | `docs/auth/m1-tai-khoan-va-xac-thuc.md` | [[m1-spec]] | Đặc tả chi tiết M1 |
 | `docs/auth/*.svg` (14 file) | [[man-hinh-m1]] | Nguồn thị giác M1 |
+| `docs/quy-uoc-code.md` | [[quy-uoc-code]] | Quy ước code (đặt tên, SCSS, khóa ngoại) — **thắng** khi mâu thuẫn về phạm vi này |
